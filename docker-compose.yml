@@ -28,7 +28,7 @@ services:
 
   ### Prefect Server API and UI
   server:
-    image: prefecthq/prefect:2.13.8-python3.11
+    image: prefecthq/prefect:${PREFECT_SERVER_VERSION:-2.13.8-python3.11}
     restart: always
     volumes:
       - prefect:/root/.prefect
@@ -37,7 +37,7 @@ services:
       - PREFECT_UI_URL=${PREFECT_SERVER}/api
       - PREFECT_API_URL=${PREFECT_SERVER}/api
       - PREFECT_SERVER_API_HOST=0.0.0.0
-      - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://postgres:postgres@database:5432/prefect
+      - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/prefect
       # Uncomment the following line if you want to use the 'S3 Bucket' storage block instead of the older 'S3' storage
       # - EXTRA_PIP_PACKAGES=prefect-aws
     ports:
