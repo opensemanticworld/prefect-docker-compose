@@ -22,8 +22,8 @@ services:
     volumes:
       - "minio:/data"
     ports:
-      - 9000:9000
-      - 9001:9001
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
     profiles: ["minio"]
 
   ### Prefect Server API and UI
@@ -41,7 +41,7 @@ services:
       # Uncomment the following line if you want to use the 'S3 Bucket' storage block instead of the older 'S3' storage
       # - EXTRA_PIP_PACKAGES=prefect-aws
     ports:
-      - 4200:4200
+      - "127.0.0.1:4200:4200"
     depends_on:
       - database
     profiles: ["server"]
